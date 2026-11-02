@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /*
+   * Light is the default; dark is a *selected* set of steps, not an inversion.
+   * `data-theme` on <html> is stamped before first paint (see index.html).
+   */
+  :root {
+    --plane: 248 250 252;
+    --surface: 255 255 255;
+    --surface-raised: 255 255 255;
+    --surface-sunken: 241 245 249;
+    --hairline: 226 232 240;
+    --ink: 15 23 42;
+    --ink-secondary: 71 85 105;
+    --ink-muted: 137 135 129;
+    --ink-inverse: 255 255 255;
+
+    /* Chart roles — validated against surface #ffffff (see dataviz run) */
+    --series-1: 42 120 214;
+    --series-2: 235 104 52;
+    --series-3: 27 175 122;
+    --grid: 225 224 217;
+    --axis: 195 194 183;
+
+    color-scheme: light;
+  }
+
+  :root[data-theme='dark'] {
+    --plane: 8 11 20;
+    --surface: 17 24 39;
+    --surface-raised: 24 33 51;
+    --surface-sunken: 13 18 31;
+    --hairline: 39 51 73;
+    --ink: 248 250 252;
+    --ink-secondary: 170 180 197;
+    --ink-muted: 137 135 129;
+    --ink-inverse: 15 23 42;
+
+    /* Dark steps of the same three hues, validated against surface #111827 */
+    --series-1: 57 135 229;
+    --series-2: 217 89 38;
+    --series-3: 25 158 112;
+    --grid: 44 44 42;
+    --axis: 56 56 53;
+
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-hairline;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-plane text-ink antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  /* Visible, consistent focus ring for keyboard users across all controls. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-500 ring-offset-2 ring-offset-plane;
+  }
+
+  /* Columns of figures must align; prose numbers should not. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-card border border-hairline bg-surface shadow-card;
+  }
+
+  .label-text {
+    @apply block text-sm font-medium text-ink-secondary;
+  }
+
+  /* Any wide child (tables, charts) scrolls inside itself, never the page. */
+  .scroll-x {
+    @apply overflow-x-auto;
+    scrollbar-width: thin;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Recharts injects inline focus outlines on its wrappers; suppress the ugly one
+   while keeping our own :focus-visible ring. */
+.recharts-wrapper:focus,
+.recharts-surface:focus {
+  outline: none;
+}

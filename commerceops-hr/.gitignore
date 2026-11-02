@@ -1,0 +1,21 @@
+node_modules/
+dist/
+build/
+.env
+.env.local
+.env.*.local
+*.log
+npm-debug.log*
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+coverage/
+
+# Embedded PostgreSQL data directory
+server/.pgdata/
+server/.pgdata-*/
+
+# Prisma
+server/prisma/*.db
+server/prisma/*.db-journal

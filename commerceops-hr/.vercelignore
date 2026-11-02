@@ -1,0 +1,11 @@
+node_modules
+**/node_modules
+**/dist
+**/.env
+**/.env.local
+**/.env.*.local
+server/.pgdata
+server/.pgdata-*
+*.log
+*.tsbuildinfo
+.vercel
