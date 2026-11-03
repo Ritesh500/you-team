@@ -2,6 +2,7 @@
   "name": "you-team",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "You Team — Employee Management System for multi-channel e-commerce operations",
   "workspaces": [
     "server",
